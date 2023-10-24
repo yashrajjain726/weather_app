@@ -7,7 +7,7 @@ class Weather extends Equatable {
   final CurrentWeather currentData;
   final NextFiveDayWeather nextFiveDayData;
   final TodayWeather todayData;
-  Weather(this.currentData, this.nextFiveDayData, this.todayData);
+  const Weather(this.currentData, this.nextFiveDayData, this.todayData);
 
   @override
   List<Object> get props => [currentData, nextFiveDayData, todayData];

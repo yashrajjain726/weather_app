@@ -4,7 +4,7 @@ import 'package:weather_app/core/errors/failures.dart';
 import 'package:weather_app/core/network/network_checker.dart';
 import 'package:weather_app/core/params/location.dart';
 import 'package:weather_app/features/data/datasource/api_client.dart';
-import 'package:weather_app/features/data/repository/weather_repository.dart';
+import 'package:weather_app/features/domain/repositories/weather_repository.dart';
 import 'package:weather_app/features/domain/entities/weather.dart';
 
 class WeatherRepositoryImpl extends WeatherRepository {

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/routes.dart';
 import 'package:weather_app/features/presentation/pages/home_screen.dart';
+import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
