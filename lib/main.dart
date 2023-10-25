@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/routes.dart';
-import 'package:weather_app/features/presentation/pages/home_screen.dart';
+import 'package:weather_app/features/presentation/pages/splash_screen.dart';
 import 'injection.dart' as di;
 
 void main() async {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
       onGenerateRoute: (settings) => onGenerateRoute(settings),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

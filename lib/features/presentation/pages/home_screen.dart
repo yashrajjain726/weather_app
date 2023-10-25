@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/errors/errors.dart';
 import 'package:weather_app/features/presentation/bloc/weather_bloc.dart';
-import 'package:weather_app/features/presentation/pages/splash_screen.dart';
 import 'package:weather_app/features/presentation/widgets/current_temp_widget.dart';
 import 'package:weather_app/features/presentation/widgets/next/seven_day_data_list_widget.dart';
 import 'package:weather_app/features/presentation/widgets/today/today_temp_list_widget.dart';
@@ -26,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
             if (state is WeatherInitial) {
               context.read<WeatherBloc>().add(const FetchWeatherEvent());
-              return const SplashScreen();
             } else if (state is WeatherLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -47,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             }
-            return const Center(
-              child: Text(Errors.SomethingWentWrong),
-            );
+            return const Center(child: Text('Fetching your location...'));
           }),
         ),
       ),

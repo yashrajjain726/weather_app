@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:weather_app/core/errors/exception.dart';
 import 'package:weather_app/core/errors/failures.dart';
 
@@ -24,13 +25,14 @@ class FetchLocationImpl implements FetchLocation {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          return Future.error('Location permissions are denied');
+          await [
+            Permission.location,
+          ].request();
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
-        return Future.error(
-            'Location permissions are permanently denied, we cannot request permissions.');
+        openAppSettings();
       }
       final location = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
