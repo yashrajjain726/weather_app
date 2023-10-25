@@ -12,14 +12,14 @@ class TodayWeather extends Equatable {
 class TodayData extends Equatable {
   final int current;
   final String time;
-  final String image;
+  final double windSpeed;
 
   const TodayData({
     required this.current,
     required this.time,
-    required this.image,
+    required this.windSpeed,
   });
 
   @override
-  List<Object?> get props => [current, time, image];
+  List<Object?> get props => [current, time, windSpeed];
 }

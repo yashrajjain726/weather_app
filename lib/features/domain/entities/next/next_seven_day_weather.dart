@@ -1,23 +1,23 @@
 import 'package:equatable/equatable.dart';
 
-class NextFiveDayWeather extends Equatable {
-  final List<NextFiveDayData> listOfNextFiveDayData;
-  NextFiveDayWeather({
-    required this.listOfNextFiveDayData,
+class NextSevenDayWeather extends Equatable {
+  final List<NextSevenDayData> listOfNextSevenDayData;
+  NextSevenDayWeather({
+    required this.listOfNextSevenDayData,
   });
 
   @override
-  List<Object> get props => [listOfNextFiveDayData];
+  List<Object> get props => [listOfNextSevenDayData];
 }
 
-class NextFiveDayData extends Equatable {
+class NextSevenDayData extends Equatable {
   final int max;
   final int min;
   final String name;
   final String day;
   final String image;
 
-  const NextFiveDayData({
+  const NextSevenDayData({
     required this.max,
     required this.min,
     required this.name,

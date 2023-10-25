@@ -1,16 +1,17 @@
 import 'package:dartz/dartz.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/core/errors/exception.dart';
 import 'package:weather_app/core/errors/failures.dart';
-import 'package:weather_app/core/params/location.dart';
 
 abstract class FetchLocation {
-  Future<Either<Failure, Location>> getLocationAddress();
+  Future<Either<Failure, Position>> getLocationAddress();
+  Future<String> getAddressFromLatLong(Position position);
 }
 
 class FetchLocationImpl implements FetchLocation {
   @override
-  Future<Either<Failure, Location>> getLocationAddress() async {
+  Future<Either<Failure, Position>> getLocationAddress() async {
     bool serviceEnabled;
     LocationPermission permission;
     try {
@@ -33,10 +34,27 @@ class FetchLocationImpl implements FetchLocation {
       }
       final location = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      return Right(
-          Location(latitude: location.latitude, longitude: location.longitude));
+      return Right(Position(
+          latitude: location.latitude,
+          longitude: location.longitude,
+          timestamp: location.timestamp,
+          accuracy: location.accuracy,
+          altitude: location.altitude,
+          altitudeAccuracy: location.altitudeAccuracy,
+          heading: location.heading,
+          headingAccuracy: location.headingAccuracy,
+          speed: location.speed,
+          speedAccuracy: location.speedAccuracy));
     } on LocationException {
       return Left(LocationFailure());
     }
+  }
+
+  @override
+  Future<String> getAddressFromLatLong(Position position) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark place = placemarks[0];
+    return '${place.locality},${place.country}';
   }
 }

@@ -16,7 +16,6 @@ class CurrentData extends Equatable {
   final int wind;
   final int humidity;
   final int chanceRain;
-  final String image;
 
   const CurrentData({
     required this.current,
@@ -25,10 +24,8 @@ class CurrentData extends Equatable {
     required this.wind,
     required this.humidity,
     required this.chanceRain,
-    required this.image,
   });
 
   @override
-  List<Object?> get props =>
-      [current, name, day, wind, humidity, chanceRain, image];
+  List<Object?> get props => [current, name, day, wind, humidity, chanceRain];
 }

@@ -1,15 +1,15 @@
 import 'package:intl/intl.dart';
 import 'package:weather_app/features/domain/entities/current/current_weather.dart';
-import 'package:weather_app/features/domain/entities/next/next_five_day_weather.dart';
+import 'package:weather_app/features/domain/entities/next/next_seven_day_weather.dart';
 import 'package:weather_app/features/domain/entities/today/today_weather.dart';
 import 'package:weather_app/features/domain/entities/weather.dart';
 
 class WeatherModel extends Weather {
   WeatherModel({
     required CurrentWeather currentWeather,
-    required NextFiveDayWeather nextFiveDayWeather,
+    required NextSevenDayWeather nextSevenDayWeather,
     required TodayWeather todayWeather,
-  }) : super(currentWeather, nextFiveDayWeather, todayWeather);
+  }) : super(currentWeather, nextSevenDayWeather, todayWeather);
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     DateTime date = DateTime.now();
@@ -22,7 +22,6 @@ class WeatherModel extends Weather {
       wind: current["wind_speed"]?.round(),
       humidity: current["humidity"]?.round(),
       chanceRain: current["uvi"]?.round(),
-      image: (current["weather"][0]["main"].toString()),
     );
 
     List<TodayData> todayData = [];
@@ -31,31 +30,31 @@ class WeatherModel extends Weather {
       var temp = json["hourly"];
       var hourly = TodayData(
           current: temp[i]["temp"].round(),
-          image: (temp[i]["weather"][0]["main"].toString()),
+          windSpeed: temp[i]["wind_speed"],
           time: "${Duration(hours: hour + i + 1).toString().split(":")[0]}:00");
       todayData.add(hourly);
     }
 
-    List<NextFiveDayData> nextFiveDayData = [];
+    List<NextSevenDayData> nextSevenDayData = [];
     for (var i = 0; i < 7; i++) {
       String day = DateFormat("EEEE")
           .format(DateTime(date.year, date.month, date.day + i + 1))
           .substring(0, 3);
       var temp = json["daily"][i];
-      var hourly = NextFiveDayData(
+      var hourly = NextSevenDayData(
         max: temp["temp"]["max"].round(),
         min: temp["temp"]["min"].round(),
         image: (temp["weather"][0]["main"].toString()),
         name: temp["weather"][0]["main"].toString(),
         day: day,
       );
-      nextFiveDayData.add(hourly);
+      nextSevenDayData.add(hourly);
     }
 
     return WeatherModel(
         currentWeather: CurrentWeather(currentData: currentData),
-        nextFiveDayWeather:
-            NextFiveDayWeather(listOfNextFiveDayData: nextFiveDayData),
+        nextSevenDayWeather:
+            NextSevenDayWeather(listOfNextSevenDayData: nextSevenDayData),
         todayWeather: TodayWeather(todayData: todayData));
   }
 }

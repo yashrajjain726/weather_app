@@ -13,10 +13,14 @@ class WeatherLoading extends WeatherState {}
 
 class WeatherLoaded extends WeatherState {
   final Weather weather;
+  final String address;
 
-  const WeatherLoaded({required this.weather});
+  const WeatherLoaded({
+    required this.weather,
+    required this.address,
+  });
   @override
-  List<Object> get props => [weather];
+  List<Object> get props => [weather, address];
 }
 
 class WeatherFetchFailed extends WeatherState {
