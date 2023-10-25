@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SevenDayDataSingleWidget extends StatelessWidget {
   final String time;
   final int minTemp;
   final int maxTemp;
+  final String dayType;
   const SevenDayDataSingleWidget({
     Key? key,
     required this.time,
     required this.minTemp,
     required this.maxTemp,
+    required this.dayType,
   }) : super(key: key);
 
   @override
@@ -30,6 +33,18 @@ class SevenDayDataSingleWidget extends StatelessWidget {
                 ),
                 child: Text(
                   time,
+                  style: GoogleFonts.questrial(
+                    color: Colors.black,
+                    fontSize: size.height * 0.025,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.25,
+                ),
+                child: Text(
+                  dayType,
                   style: GoogleFonts.questrial(
                     color: Colors.black,
                     fontSize: size.height * 0.025,

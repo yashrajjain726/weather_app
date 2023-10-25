@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/core/errors/errors.dart';
 import 'package:weather_app/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_app/features/presentation/widgets/current_temp_widget.dart';
 import 'package:weather_app/features/presentation/widgets/next/seven_day_data_list_widget.dart';

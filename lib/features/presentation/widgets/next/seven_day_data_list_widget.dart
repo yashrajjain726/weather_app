@@ -52,6 +52,7 @@ class SevenDayDataListWidget extends StatelessWidget {
                   children: data.map((daysData) {
                     return SevenDayDataSingleWidget(
                       time: daysData.day,
+                      dayType: daysData.name,
                       minTemp: daysData.min,
                       maxTemp: daysData.max,
                     );
