@@ -22,7 +22,7 @@ class WeatherModel extends Weather {
       wind: current["wind_speed"]?.round(),
       humidity: current["humidity"]?.round(),
       chanceRain: current["uvi"]?.round(),
-      image: findIcon(current["weather"][0]["main"].toString(), true),
+      image: (current["weather"][0]["main"].toString()),
     );
 
     List<TodayData> todayData = [];
@@ -31,7 +31,7 @@ class WeatherModel extends Weather {
       var temp = json["hourly"];
       var hourly = TodayData(
           current: temp[i]["temp"].round(),
-          image: findIcon(temp[i]["weather"][0]["main"].toString(), false),
+          image: (temp[i]["weather"][0]["main"].toString()),
           time: "${Duration(hours: hour + i + 1).toString().split(":")[0]}:00");
       todayData.add(hourly);
     }
@@ -45,7 +45,7 @@ class WeatherModel extends Weather {
       var hourly = NextFiveDayData(
         max: temp["temp"]["max"].round(),
         min: temp["temp"]["min"].round(),
-        image: findIcon(temp["weather"][0]["main"].toString(), false),
+        image: (temp["weather"][0]["main"].toString()),
         name: temp["weather"][0]["main"].toString(),
         day: day,
       );
@@ -57,49 +57,5 @@ class WeatherModel extends Weather {
         nextFiveDayWeather:
             NextFiveDayWeather(listOfNextFiveDayData: nextFiveDayData),
         todayWeather: TodayWeather(todayData: todayData));
-  }
-}
-
-String findIcon(String name, bool type) {
-  if (type) {
-    switch (name) {
-      case "Clouds":
-        return "assets/sunny.png";
-
-      case "Rain":
-        return "assets/rainy.png";
-
-      case "Drizzle":
-        return "assets/rainy.png";
-
-      case "Thunderstorm":
-        return "assets/thunder.png";
-
-      case "Snow":
-        return "assets/snow.png";
-
-      default:
-        return "assets/sunny.png";
-    }
-  } else {
-    switch (name) {
-      case "Clouds":
-        return "assets/sunny_2d.png";
-
-      case "Rain":
-        return "assets/rainy_2d.png";
-
-      case "Drizzle":
-        return "assets/rainy_2d.png";
-
-      case "Thunderstorm":
-        return "assets/thunder_2d.png";
-
-      case "Snow":
-        return "assets/snow_2d.png";
-
-      default:
-        return "assets/sunny_2d.png";
-    }
   }
 }
